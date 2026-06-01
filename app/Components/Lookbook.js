@@ -16,16 +16,16 @@ export default function Lookbook() {
         {/* HEADING */}
         <div className="mb-16">
 
-          <p className="hero-subtitle">
+          <p className="hero-subtitle" data-aos="fade-right" data-aos-duration="1000">
             VISUAL LOOKBOOK
           </p>
 
-          <h2 className="section-heading">
+          <h2 className="section-heading"data-aos="fade-right" data-aos-duration="1000">
             Fashion In <br />
             Motion
           </h2>
 
-          <p className="paragraph max-w-2xl mt-5">
+          <p className="paragraph max-w-2xl mt-5" data-aos="fade-right" data-aos-duration="1000">
             A curated gallery blending retro aesthetics,
             cinematic visuals, and timeless fashion energy.
           </p>

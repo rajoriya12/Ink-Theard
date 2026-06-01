@@ -35,16 +35,16 @@ export default function Collections() {
         {/* HEADING */}
         <div className="mb-16">
 
-          <p className="hero-subtitle">
+          <p className="hero-subtitle "data-aos="fade-right" data-aos-duration="1000" >
             FEATURED COLLECTIONS
           </p>
 
-          <h2 className="section-heading">
+          <h2 className="section-heading"data-aos="fade-right" data-aos-duration="1000">
             Crafted For <br />
             Modern Souls
           </h2>
 
-          <p className="paragraph font-medium max-w-3xl mt-2" >
+          <p className="paragraph font-medium max-w-3xl mt-2" data-aos="fade-right" data-aos-duration="1000">
             Explore cinematic fashion collections inspired by
             vintage editorials, retro culture, and dark luxury aesthetics.
           </p>

@@ -11,18 +11,18 @@ export default function Hero() {
         <div className="hero-content">
 
           {/* SMALL TEXT */}
-          <p className="hero-subtitle">
+          <p className="hero-subtitle" data-aos="fade-up">
             DARK RETRO FASHION
           </p>
 
           {/* MAIN HEADING */}
-          <h1 className="main-heading">
+          <h1 className="main-heading" data-aos="fade-up" data-aos-delay="100">
             Vintage Souls <br />
             Never Fade
           </h1>
 
           {/* DESCRIPTION */}
-          <p className="hero-text">
+          <p className="hero-text" data-aos="fade-up" data-aos-delay="500">
             A cinematic fashion experience inspired by midnight
             streets, vintage magazines, and timeless emotions.
             Discover retro streetwear crafted for modern souls.
