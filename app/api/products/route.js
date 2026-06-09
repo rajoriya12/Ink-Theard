@@ -44,3 +44,4 @@ export async function POST(req) {
     });
   }
 }
+console.log(Product.image);

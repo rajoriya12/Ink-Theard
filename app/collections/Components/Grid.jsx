@@ -55,6 +55,7 @@ export default function Grid() {
         }}
       >
         {products.map((product) => (
+            
           <div
             key={product._id}
             style={{
@@ -64,6 +65,7 @@ export default function Grid() {
               border: "1px solid #222",
             }}
           >
+            {console.log("Image URL:", product.image)}
             <img
               src={product.image}
               alt={product.title}
