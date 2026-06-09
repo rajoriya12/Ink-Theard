@@ -1,60 +1,42 @@
 import React from "react";
 
 function LookbookGallery() {
+  const images = [
+    "/hero.jpeg",
+    "/C1.jpeg",
+    "/C2.jpeg",
+    "/C3.jpeg",
+  ];
+
   return (
     <section
       style={{
-        padding: "80px 20px",
+        padding: "60px 16px",
       }}
     >
       <div
         style={{
           maxWidth: "1200px",
-          margin: "auto",
+          margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "20px",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: "40px",
         }}
       >
-        <img
-          src="/hero.jpeg"
-          alt=""
-          style={{
-            width: "100%",
-            height: "650px",
-            objectFit: "cover",
-          }}
-        />
-
-        <img
-          src="/C1.jpeg"
-          alt=""
-          style={{
-            width: "100%",
-            height: "650px",
-            objectFit: "cover",
-          }}
-        />
-
-        <img
-          src="/C2.jpeg"
-          alt=""
-          style={{
-            width: "100%",
-            height: "650px",
-            objectFit: "cover",
-          }}
-        />
-
-        <img
-          src="/C3.jpeg"
-          alt=""
-          style={{
-            width: "100%",
-            height: "650px",
-            objectFit: "cover",
-          }}
-        />
+        {images.map((image, index) => (
+          <img
+            key={index}
+            src={image}
+            alt={`Lookbook ${index + 1}`}
+            style={{
+              width: "100%",
+              height: "clamp(320px, 50vw, 650px)",
+              objectFit: "cover",
+              borderRadius: "12px",
+              display: "block",
+            }}
+          />
+        ))}
       </div>
     </section>
   );

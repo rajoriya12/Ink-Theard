@@ -29,154 +29,86 @@ export default function ProductPage() {
 
     if (!product) {
         return (
-            <div
-                style={{
-                    minHeight: "100vh",
-                    background: "#0a0a0a",
-                    color: "white",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: "24px",
-                }}
-            >
+            <div className="min-h-screen bg-black text-white flex items-center justify-center text-xl">
                 Loading Product...
             </div>
         );
     }
 
     return (
-        <div
-            style={{
-                minHeight: "100vh",
-                background: "#0a0a0a",
-                color: "white",
-                padding: "120px 60px",
-            }}
-        >
-            <div
-                style={{
-                    maxWidth: "1400px",
-                    margin: "0 auto",
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "80px",
-                    alignItems: "center",
-                }}
-            >
-                {/* Image Section */}
+        <div className="min-h-screen bg-black text-white px-5 md:px-8 lg:px-12 py-28" style={{margin:'130px', height:'100%', overflow:'hidden'}}>
+            <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+                {/* Product Image */}
                 <div>
                     <img
                         src={product.image}
                         alt={product.title}
-                        style={{
-                            width: "100%",
-                            maxHeight: "750px",
-                            objectFit: "cover",
-                            borderRadius: "20px",
-                        }}
+                        className="w-full h-auto max-h-[750px] object-cover rounded-2xl"
                     />
                 </div>
 
-                {/* Content Section */}
-                <div>
-                    <p
-                        style={{
-                            color: "#b08d57",
-                            textTransform: "uppercase",
-                            letterSpacing: "3px",
-                            marginBottom: "15px",
-                        }}
-                    >
+                {/* Product Content */}
+                <div style={{
+                    padding:'5px 20px'
+                }}>
+
+                    <p className="text-[#b08d57] uppercase tracking-[3px] mb-4 text-sm">
                         {product.category}
                     </p>
 
-                    <h1
-                        style={{
-                            fontSize: "60px",
-                            marginBottom: "20px",
-                            lineHeight: "1.1",
-                        }}
-                    >
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5">
                         {product.title}
                     </h1>
 
-                    <h2
-                        style={{
-                            color: "#b08d57",
-                            fontSize: "38px",
-                            marginBottom: "30px",
-                        }}
-                    >
+                    <h2 className="text-[#b08d57] text-3xl md:text-4xl mb-8 font-semibold">
                         ₹{product.price}
                     </h2>
 
-                    <p
-                        style={{
-                            color: "#cccccc",
-                            lineHeight: "1.8",
-                            fontSize: "18px",
-                            marginBottom: "40px",
-                        }}
-                    >
+                    <p className="text-gray-300 leading-8 text-base md:text-lg mb-10">
                         {product.description}
                     </p>
 
-                    <div
-                        style={{
-                            display: "flex",
-                            gap: "15px",
-                        }}
-                    >
+                    {/* Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-4">
 
-                        <Link href={`https://wa.me/919462971381?text=Hello%20I%20want%20to%20order%20${product.title}`} target="_blank" rel="noopener noreferrer">
-                            <button
-                                style={{
-                                    padding: "16px 40px",
-                                    background: "#b08d57",
-                                    color: "white",
-                                    border: "none",
-                                    borderRadius: "10px",
-                                    cursor: "pointer",
-                                    fontSize: "16px",
-                                    fontWeight: "bold",
-                                }}
-                            >
+                        <Link
+                            href={`https://wa.me/919462971381?text=Hello%20I%20want%20to%20order%20${product.title}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <button className="retro-btn w-full sm:w-auto px-8 py-4 rounded-xl font-semibold">
                                 Order on WhatsApp
                             </button>
                         </Link>
 
-                        <button
-                            style={{
-                                padding: "16px 40px",
-                                background: "transparent",
-                                color: "white",
-                                border: "1px solid #444",
-                                borderRadius: "10px",
-                                cursor: "pointer",
-                                fontSize: "16px",
-                            }}
-                        >
+                        <button className="retro-btn border border-gray-700 w-full sm:w-auto px-8 py-4 rounded-xl">
                             Buy Now
                         </button>
+
                     </div>
 
-                    <div
-                        style={{
-                            marginTop: "50px",
-                            paddingTop: "30px",
-                            borderTop: "1px solid #222",
-                        }}
-                    >
+                    {/* Product Details */}
+                    <div className="mt-12 pt-8 border-t border-zinc-800 space-y-3 text-gray-300">
+
                         <p>
-                            <strong>Category:</strong> {product.category}
+                            <span className="font-semibold text-white">
+                                Category:
+                            </span>{" "}
+                            {product.category}
                         </p>
 
-                        <p style={{ marginTop: "10px" }}>
-                            <strong>Brand:</strong> Ink & Thread
+                        <p>
+                            <span className="font-semibold text-white">
+                                Brand:
+                            </span>{" "}
+                            Ink & Thread
                         </p>
+
                     </div>
+
                 </div>
+
             </div>
         </div>
     );

@@ -11,7 +11,7 @@ export default function Hero() {
         <div className="hero-content">
 
           {/* SMALL TEXT */}
-          <p className="hero-subtitle">
+          <p className="hero-subtitle" style={{paddingTop:'90px'}}>
             DARK RETRO FASHION
           </p>
 

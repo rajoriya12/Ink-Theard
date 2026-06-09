@@ -1,6 +1,57 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import { refresh } from "aos";
+
+
 
 function ContactForm() {
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("/api/contect", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+
+        alert("Message Sent Successfully ✅");
+
+        setName("");
+        setEmail("");
+        setMessage("");
+
+      } else {
+
+        alert(data.message || "Something went wrong");
+
+      }
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Server Error ❌");
+
+    }
+  };
   return (
     <section
       style={{
@@ -34,10 +85,13 @@ function ContactForm() {
           Let's Create Something Meaningful
         </h2>
 
-        <form>
+        <form onSubmit={handleSubmit}>
+
           <input
             type="text"
             placeholder="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             style={{
               width: "100%",
               padding: "18px",
@@ -51,6 +105,8 @@ function ContactForm() {
           <input
             type="email"
             placeholder="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             style={{
               width: "100%",
               padding: "18px",
@@ -64,6 +120,8 @@ function ContactForm() {
           <textarea
             placeholder="Your Message"
             rows="6"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             style={{
               width: "100%",
               padding: "18px",
@@ -85,6 +143,7 @@ function ContactForm() {
           >
             Send Message
           </button>
+
         </form>
       </div>
     </section>

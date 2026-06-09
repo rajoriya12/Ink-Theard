@@ -7,8 +7,10 @@ import Link from "next/link";
 export default function Grid() {
   const [products, setProducts] = useState([]);
   const [visibleProducts, setVisibleProducts] = useState(8);
-  const [search, setSearch] = useState("");
+
   
+
+
 
   useEffect(() => {
     fetchProducts();
@@ -29,6 +31,8 @@ export default function Grid() {
       console.log(error);
     }
   };
+
+
 
   return (
     <section
@@ -138,13 +142,12 @@ export default function Grid() {
                       textDecoration: "none",
                     }}
                   >
-                    <button
+                    <button className="retro-btn"
                       style={{
                         width: "100%",
                         padding: "12px",
                         border: "none",
                         borderRadius: "8px",
-                        background: "#b08d57",
                         color: "#fff",
                         fontWeight: "bold",
                         cursor: "pointer",
@@ -166,22 +169,13 @@ export default function Grid() {
              
             }}
           >
-            <button className="hover:bg-[brown] transition-all"
+            <button className="retro-btn"
               onClick={() =>
                 setVisibleProducts(
                   visibleProducts + 8
                 )
               }
-              style={{
-                padding: "14px 30px",
-                background: "#b08d57",
-                color: "#fff",
-                border: "none",
-                borderRadius: "8px",
-                cursor: "pointer",
-                fontWeight: "bold",
-               
-              }}
+              
             >
               Load More
             </button>

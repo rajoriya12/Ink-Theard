@@ -15,14 +15,17 @@ function Story() {
           With A Story
         </h2>
 
-        <p className="story-text w-5xl">
-          Ink & Thread is inspired by forgotten nights,
-          old photographs, timeless poetry and cinematic memories.
-          Every collection reflects a chapter of emotion,
-          nostalgia and self-expression. We believe fashion
-          is more than clothing — it is a story that travels with you.
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, molestias, itaque totam voluptas vero nulla modi in aliquid asperiores suscipit, illum recusandae nisi porro sequi maxime. Earum facilis ullam nam.
-        </p>
+    <p className="max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto px-4 text-center text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
+  Ink & Thread is inspired by forgotten nights,
+  old photographs, timeless poetry and cinematic memories.
+  Every collection reflects a chapter of emotion,
+  nostalgia and self-expression. We believe fashion
+  is more than clothing — it is a story that travels with you.
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Qui, molestias, itaque totam voluptas vero nulla modi in
+  aliquid asperiores suscipit, illum recusandae nisi porro
+  sequi maxime. Earum facilis ullam nam.
+</p>
 
       </div>
     </section>

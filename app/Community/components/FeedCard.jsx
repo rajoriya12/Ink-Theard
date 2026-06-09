@@ -1,6 +1,6 @@
 import React from "react";
 
-function FeedCard({ item, handleLike, handleDelete, }) {
+function FeedCard({ item ,handleLike,handleDelete, }) {
   return (
     <div
       style={{
@@ -22,14 +22,14 @@ function FeedCard({ item, handleLike, handleDelete, }) {
       >
         ❤️ {item.likes}
       </button>
-      <button
-        onClick={() => {
-          console.log("BUTTON CLICKED");
-          handleDelete(item._id);
-        }}
-      >
-        🗑️ Delete
-      </button>
+     <button
+  onClick={() => {
+    console.log("BUTTON CLICKED");
+    handleDelete(item._id);
+  }}
+>
+  🗑️ Delete
+</button>
     </div>
   );
 }
