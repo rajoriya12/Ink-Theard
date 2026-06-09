@@ -36,7 +36,7 @@ export default function ProductPage() {
     }
 
     return (
-        <div className="min-h-screen bg-black text-white px-5 md:px-8 lg:px-12 py-28" style={{margin:'130px', height:'100%', overflow:'hidden'}}>
+        <div className="min-h-screen bg-black text-white px-5 md:px-8 lg:px-12 py-28">
             <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
                 {/* Product Image */}
@@ -49,9 +49,7 @@ export default function ProductPage() {
                 </div>
 
                 {/* Product Content */}
-                <div style={{
-                    padding:'5px 20px'
-                }}>
+                <div>
 
                     <p className="text-[#b08d57] uppercase tracking-[3px] mb-4 text-sm">
                         {product.category}
