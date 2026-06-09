@@ -29,26 +29,23 @@ const collections = [
 export default function Collections() {
   return (
     <section className="collection-section section-padding">
-
       <div className="container-custom">
 
         {/* HEADING */}
         <div className="mb-16">
-
-          <p className="hero-subtitle "data-aos="fade-right" data-aos-duration="1000" >
+          <p className="hero-subtitle">
             FEATURED COLLECTIONS
           </p>
 
-          <h2 className="section-heading"data-aos="fade-right" data-aos-duration="1000">
+          <h2 className="section-heading">
             Crafted For <br />
             Modern Souls
           </h2>
 
-          <p className="paragraph font-medium max-w-3xl mt-2" data-aos="fade-right" data-aos-duration="1000">
+          <p className="paragraph font-medium max-w-3xl mt-2">
             Explore cinematic fashion collections inspired by
             vintage editorials, retro culture, and dark luxury aesthetics.
           </p>
-
         </div>
 
         {/* GRID */}
@@ -56,18 +53,21 @@ export default function Collections() {
 
           {collections.map((item) => (
 
-            <div className="retro-card" key={item.id}>
+            <Link
+              href="/collections"
+              key={item.id}
+              className="retro-card block transition-all duration-300 hover:scale-[1.02]"
+            >
 
               {/* IMAGE */}
-              <div className=" overflow-hidden">
-
+              <div className="overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.title}
                   width={500}
                   height={700}
+                  className="w-full h-auto object-cover"
                 />
-
               </div>
 
               {/* CONTENT */}
@@ -81,23 +81,19 @@ export default function Collections() {
                   {item.desc}
                 </p>
 
-                <Link
-                  href="#"
-                  className="inline-block mt-6 text-[#B08D57]"
-                >
+                <span className="inline-block mt-6 text-[#B08D57] font-medium">
                   Explore Collection →
-                </Link>
+                </span>
 
               </div>
 
-            </div>
+            </Link>
 
           ))}
 
         </div>
 
       </div>
-
     </section>
   );
 }

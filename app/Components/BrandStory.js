@@ -2,7 +2,7 @@
 
 export default function BrandStory() {
   return (
-    <section className="section-padding bg-[#0D0D0D]" data-aos="fade-right" data-aos-duration="1000">
+    <section className="section-padding bg-[#0D0D0D]" >
 
       <div className="container-custom">
 
