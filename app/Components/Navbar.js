@@ -6,8 +6,49 @@ import { FaRegHeart } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { useState, useEffect } from "react";
 
+
 export default function Navbar() {
     const [openMenu, setOpenMenu] = useState(false);
+    const [results, setResults] = useState([]);
+    const [search, setSearch] = useState("");
+
+
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+    const fetchProducts = async () => {
+        try {
+            const res = await fetch("/api/products");
+            const data = await res.json();
+
+            if (data.success) {
+                setProducts(data.products);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
+    useEffect(() => {
+
+        if (!search.trim()) {
+            setResults([]);
+            return;
+        }
+
+        const filtered = products.filter((product) =>
+            product.title
+                .toLowerCase()
+                .includes(search.toLowerCase())
+        );
+
+        setResults(filtered);
+
+    }, [search, products]);
     return (
         <header className="navbar_sec">
             <div className="container-custom" >
@@ -54,9 +95,52 @@ export default function Navbar() {
                     <div className="nav_icons flex items-center gap-6">
 
                         {/* SEARCH */}
-                        <div className="searchbar hidden lg:block">
-                            <input type="text" placeholder="Search..." />
+                        <div className="searchbar hidden lg:block" style={{
+                            position:'relative'
+                        }}>
+                            <input type="text" placeholder="Search..." value={search}
+                                onChange={(e) => setSearch(e.target.value)} />
                         </div>
+
+                        {results.length > 0 && (
+
+                            <div
+                                style={{
+                                    position: "absolute",
+                                    top: "50px",
+                                    width: "250px",
+                                    background: "#111",
+                                    border: "1px solid #333",
+                                    borderRadius: "8px",
+                                    zIndex: 9999,
+                                }}
+                            >
+
+                                {results.slice(0, 5).map((item) => (
+
+                                    <Link
+                                        key={item._id}
+                                        href={`/products/${item._id}`}
+                                        onClick={() => {
+                                            setSearch("");
+                                            setResults([]);
+                                        }}
+                                        style={{
+                                            display: "block",
+                                            padding: "12px",
+                                            color: "white",
+                                            textDecoration: "none",
+                                            borderBottom: "1px solid #222",
+                                        }}
+                                    >
+                                        {item.title}
+                                    </Link>
+
+                                ))}
+
+                            </div>
+
+                        )}
 
                         {/* ICONS */}
                         <FaRegHeart />
@@ -73,7 +157,7 @@ export default function Navbar() {
                 </div>
 
             </div>
-            
+
             {openMenu && (
                 <div
                     style={{
