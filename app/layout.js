@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
     >
       <body>
         <Navbar />
-        <AosProvider>{children}</AosProvider>
+        {children}
   
       </body>
     </html>
