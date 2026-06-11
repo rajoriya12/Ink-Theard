@@ -89,11 +89,11 @@ export default function Grid() {
                 }}
               >
                 <img
-                  src={product.image || "/no-image.jpg"}
+                  src={product.image || "/no-image.jpeg"}
                   alt={product.title}
                   onError={(e) => {
                     e.currentTarget.src =
-                      "/no-image.jpg";
+                      "/no-image.jpeg";
                   }}
                   style={{
                     width: "100%",

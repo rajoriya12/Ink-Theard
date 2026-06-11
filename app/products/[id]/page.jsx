@@ -36,7 +36,11 @@ export default function ProductPage() {
     }
 
     return (
-        <div className="min-h-screen bg-black text-white px-5 md:px-8 lg:px-12 py-28">
+        <div className="min-h-screen bg-black text-white px-5 md:px-8 lg:px-12 py-28" style={{
+            display:'flex',
+            alignItems:'center',
+            justifyContent:'space-around'
+        }}>
             <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
                 {/* Product Image */}
@@ -44,7 +48,7 @@ export default function ProductPage() {
                     <img
                         src={product.image}
                         alt={product.title}
-                        className="w-full h-auto max-h-[750px] object-cover rounded-2xl"
+                        className="w-full h-auto max-h-187.5 object-cover rounded-2xl"
                     />
                 </div>
 
