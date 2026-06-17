@@ -6,32 +6,27 @@ import Link from "next/link";
 
 export default function Grid() {
   const [products, setProducts] = useState([]);
-  const [visibleProducts, setVisibleProducts] = useState(8);
+const [visibleProducts, setVisibleProducts] = useState(8);
 
-  
+const fetchProducts = async () => {
+  try {
+    const res = await fetch("/api/products", {
+      cache: "no-store",
+    });
 
+    const data = await res.json();
 
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    try {
-      const res = await fetch("/api/products", {
-        cache: "no-store",
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        setProducts(data.products);
-      }
-    } catch (error) {
-      console.log(error);
+    if (data.success) {
+      setProducts(data.products);
     }
-  };
+  } catch (error) {
+    console.log(error);
+  }
+};
 
+useEffect(() => {
+  fetchProducts();
+}, []);
 
 
   return (
@@ -166,7 +161,7 @@ export default function Grid() {
             style={{
               textAlign: "center",
               marginTop: "50px",
-             
+
             }}
           >
             <button className="retro-btn"
@@ -175,7 +170,7 @@ export default function Grid() {
                   visibleProducts + 8
                 )
               }
-              
+
             >
               Load More
             </button>

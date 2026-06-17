@@ -35,11 +35,53 @@ export default function ProductPage() {
         );
     }
 
+    const addToCart = () => {
+
+        const cart =
+            JSON.parse(
+                localStorage.getItem("cart")
+            ) || [];
+
+        const exists = cart.find(
+            (item) => item.id === product._id
+        );
+
+        if (exists) {
+            alert("Product already in cart");
+            return;
+        }
+        const existingProduct = cart.find(
+            (item) => item.id === product._id
+        );
+
+        if (existingProduct) {
+            existingProduct.quantity += 1;
+        } else {
+            cart.push({
+                id: product._id,
+                title: product.title,
+                price: product.price,
+                image: product.image,
+                quantity: 1,
+            });
+        }
+
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(cart)
+        );
+
+        alert("Added To Cart");
+    };
+
+
+
+
     return (
         <div className="min-h-screen bg-black text-white px-5 md:px-8 lg:px-12 py-28" style={{
-            display:'flex',
-            alignItems:'center',
-            justifyContent:'space-around'
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-around'
         }}>
             <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
@@ -73,20 +115,20 @@ export default function ProductPage() {
 
                     {/* Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4">
+                        <button
+                            onClick={addToCart}
+                            className="retro-btn border border-gray-700 w-full sm:w-auto px-8 py-4 rounded-xl"
+                        >
+                            Add To Cart
+                        </button>
 
                         <Link
-                            href={`https://wa.me/919462971381?text=Hello%20I%20want%20to%20order%20${product.title}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href={`/chakeout?id=${product._id}`}
                         >
-                            <button className="retro-btn w-full sm:w-auto px-8 py-4 rounded-xl font-semibold">
-                                Order on WhatsApp
+                            <button className="retro-btn border border-gray-700 w-full sm:w-auto px-8 py-4 rounded-xl">
+                                Buy Now
                             </button>
                         </Link>
-
-                        <button className="retro-btn border border-gray-700 w-full sm:w-auto px-8 py-4 rounded-xl">
-                            Buy Now
-                        </button>
 
                     </div>
 
