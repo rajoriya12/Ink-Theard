@@ -179,7 +179,7 @@ function CheckoutContent() {
               value={formData.customerName}
               onChange={handleChange}
               className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4"
-              style={{padding:'5px 15px'}}
+              style={{ padding: '5px 15px' }}
             />
 
             <input
@@ -189,7 +189,7 @@ function CheckoutContent() {
               value={formData.customerEmail}
               onChange={handleChange}
               className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4"
-                  style={{padding:'5px 15px'}}
+              style={{ padding: '5px 15px' }}
             />
 
             <input
@@ -199,7 +199,7 @@ function CheckoutContent() {
               value={formData.phone}
               onChange={handleChange}
               className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4"
-                  style={{padding:'5px 15px'}}
+              style={{ padding: '5px 15px' }}
             />
 
             <textarea
@@ -209,7 +209,7 @@ function CheckoutContent() {
               value={formData.address}
               onChange={handleChange}
               className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4 resize-none"
-                  style={{padding:'5px 15px'}}
+              style={{ padding: '5px 15px' }}
             />
 
             <div className="grid md:grid-cols-2 gap-5">
@@ -220,7 +220,7 @@ function CheckoutContent() {
                 value={formData.city}
                 onChange={handleChange}
                 className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4"
-                    style={{padding:'5px 15px'}}
+                style={{ padding: '5px 15px' }}
               />
 
               <input
@@ -230,7 +230,7 @@ function CheckoutContent() {
                 value={formData.state}
                 onChange={handleChange}
                 className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4"
-                    style={{padding:'5px 15px'}}
+                style={{ padding: '5px 15px' }}
               />
             </div>
 
@@ -241,7 +241,7 @@ function CheckoutContent() {
               value={formData.pincode}
               onChange={handleChange}
               className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4"
-                  style={{padding:'5px 15px'}}
+              style={{ padding: '5px 15px' }}
             />
 
             <div className="border-t border-zinc-700 pt-6 mt-8">
@@ -258,7 +258,7 @@ function CheckoutContent() {
               <button
                 onClick={handleOrder}
                 className="w-full bg-[#b08d57] text-black font-bold py-4 rounded-xl hover:opacity-90 transition"
-                    style={{padding:'5px 15px'}}
+                style={{ padding: '5px 15px' }}
               >
                 Place Order
               </button>
