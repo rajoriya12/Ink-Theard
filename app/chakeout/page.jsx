@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const searchParams = useSearchParams();
   const productId = searchParams.get("id");
 
@@ -54,25 +54,8 @@ export default function CheckoutPage() {
     }));
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center text-2xl">
-        Loading Checkout...
-      </div>
-    );
-  }
-
-  if (!product) {
-    return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center text-2xl">
-        Product Not Found
-      </div>
-    );
-  }
   const handleOrder = async () => {
     try {
-      console.log(product);
-      console.log(product.image);
       const response = await fetch("/api/orders", {
         method: "POST",
         headers: {
@@ -80,20 +63,10 @@ export default function CheckoutPage() {
         },
         body: JSON.stringify({
           ...formData,
-
-          customerName: formData.customerName,
-          customerEmail: formData.customerEmail,
-          phone: formData.phone,
-          address: formData.address,
-          city: formData.city,
-          state: formData.state,
-          pincode: formData.pincode,
-
           productId: product._id,
           productTitle: product.title,
           productPrice: product.price,
           productImage: product.image,
-
           status: "Pending",
         }),
       });
@@ -121,30 +94,42 @@ export default function CheckoutPage() {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center text-2xl">
+        Loading Checkout...
+      </div>
+    );
+  }
 
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center text-2xl">
+        Product Not Found
+      </div>
+    );
+  }
 
   return (
     <section className="min-h-screen bg-black text-white pt-45 pb-20 px-5 md:px-10 flex flex-col items-center justify-center">
-      {/* Heading */}
-
       <div className="text-center mb-14">
         <p className="text-[#b08d57] uppercase tracking-[4px] text-sm mb-3">
           Secure Checkout
         </p>
 
-        <h1 className="text-4xl md:text-6xl  font-bold" style={{
-          marginTop: '30px'
-        }}>
+        <h1
+          className="text-4xl md:text-6xl font-bold"
+          style={{ marginTop: "30px" }}
+        >
           Complete Your Order
         </h1>
       </div>
 
-      {/* Main Grid */}
-
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-start" >
-        {/* Product Card */}
-
-        <div className="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-xl" style={{ padding: '15px' }}>
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
+        <div
+          className="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-xl"
+          style={{ padding: "15px" }}
+        >
           <img
             src={product.image}
             alt={product.title}
@@ -156,9 +141,7 @@ export default function CheckoutPage() {
               {product.category}
             </p>
 
-            <h2 className="text-3xl font-bold mb-4">
-              {product.title}
-            </h2>
+            <h2 className="text-3xl font-bold mb-4">{product.title}</h2>
 
             <p className="text-gray-400 leading-7 mb-6">
               {product.description}
@@ -170,32 +153,33 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        {/* Form Card */}
-
-        <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 shadow-xl " style={{
-          padding: '20px',
-          margin: '10px'
-        }} >
+        <div
+          className="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 shadow-xl"
+          style={{
+            padding: "20px",
+            margin: "10px",
+          }}
+        >
           <h2 className="text-3xl font-bold mb-8">
             Shipping Information
           </h2>
 
-          <div className="space-y-5 mt-3" style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '20px'
-
-          }}>
+          <div
+            className="space-y-5 mt-3"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
             <input
               type="text"
               name="customerName"
               placeholder="Full Name"
               value={formData.customerName}
               onChange={handleChange}
-              className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-[#b08d57] "
-              style={{
-                padding: '5px 15px'
-              }}
+              className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4"
+              style={{padding:'5px 15px'}}
             />
 
             <input
@@ -204,10 +188,8 @@ export default function CheckoutPage() {
               placeholder="Email Address"
               value={formData.customerEmail}
               onChange={handleChange}
-              className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-[#b08d57]"
-              style={{
-                padding: '5px 15px'
-              }}
+              className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4"
+                  style={{padding:'5px 15px'}}
             />
 
             <input
@@ -216,10 +198,8 @@ export default function CheckoutPage() {
               placeholder="Phone Number"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-[#b08d57]"
-              style={{
-                padding: '5px 15px'
-              }}
+              className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4"
+                  style={{padding:'5px 15px'}}
             />
 
             <textarea
@@ -228,10 +208,8 @@ export default function CheckoutPage() {
               placeholder="Full Address"
               value={formData.address}
               onChange={handleChange}
-              className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4 resize-none focus:outline-none focus:border-[#b08d57]"
-              style={{
-                padding: '5px 15px'
-              }}
+              className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4 resize-none"
+                  style={{padding:'5px 15px'}}
             />
 
             <div className="grid md:grid-cols-2 gap-5">
@@ -241,10 +219,8 @@ export default function CheckoutPage() {
                 placeholder="City"
                 value={formData.city}
                 onChange={handleChange}
-                className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-[#b08d57]"
-                style={{
-                  padding: '5px 15px'
-                }}
+                className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4"
+                    style={{padding:'5px 15px'}}
               />
 
               <input
@@ -253,10 +229,8 @@ export default function CheckoutPage() {
                 placeholder="State"
                 value={formData.state}
                 onChange={handleChange}
-                className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-[#b08d57]"
-                style={{
-                  padding: '5px 15px'
-                }}
+                className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4"
+                    style={{padding:'5px 15px'}}
               />
             </div>
 
@@ -266,13 +240,9 @@ export default function CheckoutPage() {
               placeholder="Pincode"
               value={formData.pincode}
               onChange={handleChange}
-              className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4 focus:outline-none focus:border-[#b08d57]"
-              style={{
-                padding: '5px 15px'
-              }}
+              className="w-full bg-black border border-zinc-700 rounded-xl px-5 py-4"
+                  style={{padding:'5px 15px'}}
             />
-
-            {/* Order Summary */}
 
             <div className="border-t border-zinc-700 pt-6 mt-8">
               <div className="flex justify-between items-center mb-6">
@@ -285,11 +255,10 @@ export default function CheckoutPage() {
                 </span>
               </div>
 
-              <button onClick={handleOrder}
+              <button
+                onClick={handleOrder}
                 className="w-full bg-[#b08d57] text-black font-bold py-4 rounded-xl hover:opacity-90 transition"
-                style={{
-                  padding: '5px 15px'
-                }}
+                    style={{padding:'5px 15px'}}
               >
                 Place Order
               </button>
@@ -298,5 +267,19 @@ export default function CheckoutPage() {
         </div>
       </div>
     </section>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-black text-white flex items-center justify-center text-2xl">
+          Loading Checkout...
+        </div>
+      }
+    >
+      <CheckoutContent />
+    </Suspense>
   );
 }
