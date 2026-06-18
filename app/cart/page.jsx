@@ -1,5 +1,5 @@
 "use client";
-
+export const dynamic = "force-dynamic";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export default function CartPage() {
 
 
-
+    const router = useRouter();
     const [cart, setCart] = useState([]);
 
 
@@ -27,10 +27,6 @@ export default function CartPage() {
 
     }, [router]);
 
-
-
-
-    const router = useRouter();
     useEffect(() => {
 
         const email =
