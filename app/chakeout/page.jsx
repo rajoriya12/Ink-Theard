@@ -20,7 +20,14 @@ function CheckoutContent() {
     state: "",
     pincode: "",
   });
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
 
+    if (!user) {
+      alert("Please login first");
+      window.location.href = "/login";
+    }
+  }, []);
   useEffect(() => {
     if (!productId) {
       setLoading(false);
@@ -56,43 +63,60 @@ function CheckoutContent() {
 
   const handleOrder = async () => {
     try {
-      const response = await fetch("/api/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          productId: product._id,
-          productTitle: product.title,
-          productPrice: product.price,
-          productImage: product.image,
-          status: "Pending",
-        }),
-      });
+      const user = JSON.parse(
+        localStorage.getItem("user")
+      );
 
-      const data = await response.json();
+      ```
+if (!user) {
+  alert("Please login first");
+  return;
+}
 
-      if (data.success) {
-        alert("Order Placed Successfully!");
+const response = await fetch("/api/orders", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    ...formData,
 
-        setFormData({
-          customerName: "",
-          customerEmail: "",
-          phone: "",
-          address: "",
-          city: "",
-          state: "",
-          pincode: "",
-        });
-      } else {
-        alert(data.message);
-      }
+    user,
+
+    productId: product._id,
+    productTitle: product.title,
+    productPrice: product.price,
+    productImage: product.image,
+
+    status: "Pending",
+  }),
+});
+
+const data = await response.json();
+
+if (data.success) {
+  alert("Order Placed Successfully!");
+
+  setFormData({
+    customerName: "",
+    customerEmail: "",
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    pincode: "",
+  });
+} else {
+  alert(data.message);
+}
+```
+
     } catch (error) {
       console.error(error);
       alert("Something went wrong");
     }
   };
+
 
   if (loading) {
     return (

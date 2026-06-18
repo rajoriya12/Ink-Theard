@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 
 export default function CartPage() {
 
+
+
     const [cart, setCart] = useState([]);
 
     useEffect(() => {
@@ -18,6 +20,8 @@ export default function CartPage() {
         setCart(items);
 
     }, []);
+
+
 
     const router = useRouter();
     useEffect(() => {
@@ -39,6 +43,25 @@ export default function CartPage() {
         setCart(items);
 
     }, [router]);
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        ```
+if (!user) {
+    alert("Please login first");
+    router.push("/login");
+    return;
+}
+
+const items =
+    JSON.parse(localStorage.getItem("cart")) || [];
+
+setCart(items);
+```
+
+    }, [router]);
+
 
     const removeItem = (id) => {
 
