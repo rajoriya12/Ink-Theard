@@ -5,11 +5,13 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 function CheckoutContent() {
+  const [checkingAuth, setCheckingAuth] = useState(true);
   const searchParams = useSearchParams();
   const productId = searchParams.get("id");
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+
 
   const [formData, setFormData] = useState({
     customerName: "",
@@ -20,15 +22,25 @@ function CheckoutContent() {
     state: "",
     pincode: "",
   });
-  useEffect(() => {
-  const userData = localStorage.getItem("user");
 
-  if (!userData) {
-    alert("Please login first");
-    window.location.replace("/login");
-    return;
+  useEffect(() => {
+
+    const userEmail =
+      localStorage.getItem("userEmail");
+
+    if (!userEmail) {
+
+      window.location.replace("/login");
+      return;
+    }
+
+    setCheckingAuth(false);
+
+  }, []);
+  if (checkingAuth) {
+    return null;
   }
-}, []);
+
   useEffect(() => {
     if (!productId) {
       setLoading(false);
@@ -64,15 +76,9 @@ function CheckoutContent() {
 
   const handleOrder = async () => {
     try {
-      const user = JSON.parse(
-        localStorage.getItem("user")
-      );
 
       ```
-if (!user) {
-  alert("Please login first");
-  return;
-}
+
 
 const response = await fetch("/api/orders", {
   method: "POST",
