@@ -1,22 +1,35 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function OrdersPage() {
 
     const [orders, setOrders] = useState([]);
     const [email, setEmail] = useState("");
+    const [checkingAuth, setCheckingAuth] = useState(true);
 
+
+    const router = useRouter();
     useEffect(() => {
 
-        const userEmail = localStorage.getItem("userEmail");
+        const userEmail =
+            localStorage.getItem("userEmail");
 
-        if (userEmail) {
-            setEmail(userEmail);
+        if (!userEmail) {
+
+            router.push("/login");
+
+            return;
         }
+        if (checkingAuth) {
+            return null;
+        }
+        setEmail(userEmail);
+        setCheckingAuth(false);
 
-    }, []);
+    }, [router]);
 
     useEffect(() => {
 

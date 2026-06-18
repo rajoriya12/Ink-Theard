@@ -5,17 +5,16 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function CartPage() {
-
+    const [checkingAuth, setCheckingAuth] = useState(true);
 
     const router = useRouter();
     const [cart, setCart] = useState([]);
 
-
     useEffect(() => {
-        const userData = localStorage.getItem("user");
 
-        if (!userData) {
-            alert("Please login first");
+        const email = localStorage.getItem("userEmail");
+
+        if (!email) {
             router.push("/login");
             return;
         }
@@ -24,28 +23,16 @@ export default function CartPage() {
             JSON.parse(localStorage.getItem("cart")) || [];
 
         setCart(items);
+        setCheckingAuth(false);
 
     }, [router]);
 
-    useEffect(() => {
+    if (checkingAuth) {
+        return null;
+    }
 
-        const email =
-            localStorage.getItem("userEmail");
+   
 
-        if (!email) {
-
-            router.push("/login");
-            return;
-        }
-
-        const items =
-            JSON.parse(
-                localStorage.getItem("cart")
-            ) || [];
-
-        setCart(items);
-
-    }, [router]);
 
 
 
