@@ -1,30 +1,37 @@
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
-{
-  name: String,
+  {
+    name: String,
 
-  email: {
-    type: String,
-    unique: true,
-  },
+    email: {
+      type: String,
+      unique: true,
+    },
 
-  phone: {
-    type: String,
-    unique: true,
-  },
+    password: {
+      type: String,
+      required: true,
+    },
 
-  role: {
-    type: String,
-    default: "user",
-  },
+    phone: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
 
-  isVerified: {
-    type: Boolean,
-    default: false,
+    role: {
+      type: String,
+      default: "user",
+    },
+
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
-},
-{ timestamps: true }
+  { timestamps: true }
 );
+
 export default mongoose.models.User ||
   mongoose.model("User", UserSchema);
