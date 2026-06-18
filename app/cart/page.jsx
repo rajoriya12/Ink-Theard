@@ -10,16 +10,23 @@ export default function CartPage() {
 
     const [cart, setCart] = useState([]);
 
+
     useEffect(() => {
+        const userData = localStorage.getItem("user");
+
+        if (!userData) {
+            alert("Please login first");
+            router.push("/login");
+            return;
+        }
 
         const items =
-            JSON.parse(
-                localStorage.getItem("cart")
-            ) || [];
+            JSON.parse(localStorage.getItem("cart")) || [];
 
         setCart(items);
 
-    }, []);
+    }, [router]);
+
 
 
 
@@ -44,22 +51,6 @@ export default function CartPage() {
 
     }, [router]);
 
-    useEffect(() => {
-        const userData = localStorage.getItem("user");
-        ```
-  if (!userData) {
-    alert("Please login first");
-    window.location.replace("/login");
-    return;
-  }
-
-const items =
-    JSON.parse(localStorage.getItem("cart")) || [];
-
-setCart(items);
-```
-
-    }, [router]);
 
 
     const removeItem = (id) => {
