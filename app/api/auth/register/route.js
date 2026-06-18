@@ -40,6 +40,7 @@ export async function POST(req) {
             name,
             email,
             password: hashedPassword,
+            phone,
         });
 
         return Response.json({
