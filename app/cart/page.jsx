@@ -45,14 +45,13 @@ export default function CartPage() {
     }, [router]);
 
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"));
-
+        const userData = localStorage.getItem("user");
         ```
-if (!user) {
+  if (!userData) {
     alert("Please login first");
-    router.push("/login");
+    window.location.replace("/login");
     return;
-}
+  }
 
 const items =
     JSON.parse(localStorage.getItem("cart")) || [];

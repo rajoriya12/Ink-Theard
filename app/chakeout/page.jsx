@@ -21,13 +21,14 @@ function CheckoutContent() {
     pincode: "",
   });
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+  const userData = localStorage.getItem("user");
 
-    if (!user) {
-      alert("Please login first");
-      window.location.href = "/login";
-    }
-  }, []);
+  if (!userData) {
+    alert("Please login first");
+    window.location.replace("/login");
+    return;
+  }
+}, []);
   useEffect(() => {
     if (!productId) {
       setLoading(false);
