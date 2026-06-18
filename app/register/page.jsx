@@ -109,6 +109,18 @@ export default function RegisterPage() {
           }}
         />
 
+         <input
+          type="tel"
+          name="phone"
+          placeholder="Phone Number"
+          value={formData.phone}
+          onChange={handleChange}
+          className="w-full mb-6 p-4 bg-black rounded-xl"
+           style={{
+            padding:'15px 25px'
+          }}
+        />
+
         <button
           className="w-full bg-[#b08d57] text-black font-bold py-4 rounded-xl"
            style={{
