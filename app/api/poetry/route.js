@@ -43,23 +43,3 @@ export async function GET() {
   }
 }
 
-export async function DELETE(req, { params }) {
-  try {
-    await ConnectDB();
-
-    const { id } = await params;
-
-    await Poetry.findByIdAndDelete(id);
-
-    return Response.json({
-      success: true,
-      message: "Poetry Deleted Successfully",
-    });
-
-  } catch (error) {
-    return Response.json({
-      success: false,
-      message: error.message,
-    });
-  }
-}

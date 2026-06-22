@@ -37,9 +37,7 @@ function CheckoutContent() {
     setCheckingAuth(false);
 
   }, []);
-  if (checkingAuth) {
-    return null;
-  }
+
 
   useEffect(() => {
     if (!productId) {
@@ -64,7 +62,13 @@ function CheckoutContent() {
 
     fetchProduct();
   }, [productId]);
-
+  if (checkingAuth) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        Checking Authentication...
+      </div>
+    );
+  }
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -76,50 +80,57 @@ function CheckoutContent() {
 
   const handleOrder = async () => {
     try {
+      const userEmail = localStorage.getItem("userEmail");
 
-      ```
+      if (!userEmail) {
+        alert("Please login first");
+        return;
+      }
 
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: userEmail,
 
-const response = await fetch("/api/orders", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    ...formData,
+          customerName: formData.customerName,
+          customerEmail: formData.customerEmail,
+          phone: formData.phone,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          pincode: formData.pincode,
 
-    user,
+          productId: product._id,
+          productTitle: product.title,
+          productPrice: product.price,
+          productImage: product.image,
 
-    productId: product._id,
-    productTitle: product.title,
-    productPrice: product.price,
-    productImage: product.image,
+          status: "Pending",
+        }),
+      });
 
-    status: "Pending",
-  }),
-});
+      const data = await response.json();
 
-const data = await response.json();
+      if (data.success) {
+        alert("Order Placed Successfully!");
 
-if (data.success) {
-  alert("Order Placed Successfully!");
-
-  setFormData({
-    customerName: "",
-    customerEmail: "",
-    phone: "",
-    address: "",
-    city: "",
-    state: "",
-    pincode: "",
-  });
-} else {
-  alert(data.message);
-}
-```
-
+        setFormData({
+          customerName: "",
+          customerEmail: "",
+          phone: "",
+          address: "",
+          city: "",
+          state: "",
+          pincode: "",
+        });
+      } else {
+        alert(data.message || "Failed to place order");
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Order Error:", error);
       alert("Something went wrong");
     }
   };

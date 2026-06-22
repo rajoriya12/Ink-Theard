@@ -1,6 +1,6 @@
 import React from "react";
 
-function FeedCard({ item ,handleLike,handleDelete, }) {
+function FeedCard({ item, handleLike, handleDelete, }) {
   return (
     <div
       style={{
@@ -13,23 +13,26 @@ function FeedCard({ item ,handleLike,handleDelete, }) {
       <h3>{item.title}</h3>
 
       <p>{item.content}</p>
-      <p>❤️ {item.likes}</p>
+      <div className="flex gap-5" style={{
+        padding:'20px',
+        margin:'10px'
+      }}>
+        <small>By {item.author}</small>
 
-      <small>By {item.author}</small>
-
-      <button
-        onClick={() => handleLike(item._id)}
-      >
-        ❤️ {item.likes}
-      </button>
-     <button
-  onClick={() => {
-    console.log("BUTTON CLICKED");
-    handleDelete(item._id);
-  }}
->
-  🗑️ Delete
-</button>
+        <button
+          onClick={() => handleLike(item._id)}
+        >
+          ❤️ {item.likes}
+        </button>
+        <button
+          onClick={() => {
+            console.log("BUTTON CLICKED");
+            handleDelete(item._id);
+          }}
+        >
+          🗑️ Delete
+        </button>
+      </div>
     </div>
   );
 }

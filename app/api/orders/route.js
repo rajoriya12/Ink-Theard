@@ -2,31 +2,30 @@ import ConnectDB from "@/app/lib/mongodb";
 import Order from "@/models/Order";
 
 export async function POST(req) {
-try {
-await ConnectDB();
+  try {
+    await ConnectDB();
 
-```
-const body = await req.json();
+    const body = await req.json();
 
-if (!body.user) {
-  return Response.json({
-    success: false,
-    message: "Login required",
-  });
-}
+    if (!body.user) {
+      return Response.json({
+        success: false,
+        message: "Login required",
+      });
+    }
 
-const order = await Order.create(body);
+    const order = await Order.create(body);
 
-return Response.json({
-  success: true,
-  order,
-});
-```
+    return Response.json({
+      success: true,
+      order,
+    });
+  } catch (error) {
+    console.error(error);
 
-} catch (error) {
-return Response.json({
-success: false,
-message: error.message,
-});
-}
+    return Response.json({
+      success: false,
+      message: error.message,
+    });
+  }
 }

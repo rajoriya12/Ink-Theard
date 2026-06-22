@@ -24,7 +24,7 @@ export default function OrdersPage() {
             return;
         }
         if (checkingAuth) {
-            return null;
+            return;
         }
         setEmail(userEmail);
         setCheckingAuth(false);

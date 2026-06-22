@@ -6,27 +6,27 @@ import Link from "next/link";
 
 export default function Grid() {
   const [products, setProducts] = useState([]);
-const [visibleProducts, setVisibleProducts] = useState(8);
+  const [visibleProducts, setVisibleProducts] = useState(8);
 
-const fetchProducts = async () => {
-  try {
-    const res = await fetch("/api/products", {
-      cache: "no-store",
-    });
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch("/api/products", {
+        cache: "no-store",
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.success) {
-      setProducts(data.products);
+      if (data.success) {
+        setProducts(data.products);
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
-};
+  };
 
-useEffect(() => {
-  fetchProducts();
-}, []);
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
 
   return (

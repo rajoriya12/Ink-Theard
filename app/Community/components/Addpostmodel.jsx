@@ -53,7 +53,11 @@ function Addpostmodel({ activeTab, refreshData }) {
 
             <form
                 onSubmit={handleSubmit}
-                className="flex flex-col gap-5"
+                className="flex flex-col gap-5 "
+                style={{
+                    padding: '5px 15px'
+                }}
+
             >
                 <input
                     type="text"
@@ -61,6 +65,10 @@ function Addpostmodel({ activeTab, refreshData }) {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     className="w-full p-4 rounded-xl bg-zinc-900 border border-zinc-700 outline-none"
+                    style={{
+                        padding: '5px 15px'
+                    }}
+
                 />
 
                 <input
@@ -69,6 +77,10 @@ function Addpostmodel({ activeTab, refreshData }) {
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
                     className="w-full p-4 rounded-xl bg-zinc-900 border border-zinc-700 outline-none"
+                    style={{
+                        padding: '5px 15px'
+                    }}
+
                 />
 
                 <textarea
@@ -77,11 +89,19 @@ function Addpostmodel({ activeTab, refreshData }) {
                     onChange={(e) => setContent(e.target.value)}
                     rows={8}
                     className="w-full p-4 rounded-xl bg-zinc-900 border border-zinc-700 outline-none resize-none"
+                    style={{
+                        padding: '5px 15px'
+                    }}
+
                 />
 
                 <button
                     type="submit"
                     className="retro-btn px-8 py-4 rounded-xl font-semibold w-full sm:w-fit"
+                    style={{
+                        padding: '5px 15px'
+                    }}
+
                 >
                     {activeTab === "poetry"
                         ? "Publish Poetry"

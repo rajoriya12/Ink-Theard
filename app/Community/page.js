@@ -86,9 +86,10 @@ function Page() {
                     display: 'flex',
                     gap: '20px',
                     padding: '20px',
+                    flexDirection:'column'
                 }}
             >
-                <div style={{ width: '400px' }}>
+                <div>
                     <Sidebar
                         poetryCount={poetry.length}
                         storyCount={stories.length}
