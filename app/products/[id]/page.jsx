@@ -5,18 +5,26 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 export default function ProductPage() {
+
     const params = useParams();
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
+
         const fetchProduct = async () => {
+
             try {
-                const res = await fetch(`/api/products/${params.id}`);
+
+                const res = await fetch(
+                    `/api/products/${params.id}`
+                );
+
                 const data = await res.json();
 
                 if (data.success) {
                     setProduct(data.product);
                 }
+
             } catch (error) {
                 console.log(error);
             }
@@ -25,38 +33,37 @@ export default function ProductPage() {
         if (params?.id) {
             fetchProduct();
         }
-    }, [params]);
 
-    if (!product) {
-        return (
-            <div className="min-h-screen bg-black text-white flex items-center justify-center text-xl">
-                Loading Product...
-            </div>
-        );
-    }
+    }, [params]);
 
     const addToCart = () => {
 
-        const cart =
-            JSON.parse(
-                localStorage.getItem("cart")
-            ) || [];
+        const email =
+            localStorage.getItem("userEmail");
 
-        const exists = cart.find(
-            (item) => item.id === product._id
-        );
-
-        if (exists) {
-            alert("Product already in cart");
+        if (!email) {
+            alert("Please login first");
             return;
         }
-        const existingProduct = cart.find(
-            (item) => item.id === product._id
-        );
+
+        const cartKey = `cart_${email}`;
+
+        const cart =
+            JSON.parse(
+                localStorage.getItem(cartKey)
+            ) || [];
+
+        const existingProduct =
+            cart.find(
+                item => item.id === product._id
+            );
 
         if (existingProduct) {
+
             existingProduct.quantity += 1;
+
         } else {
+
             cart.push({
                 id: product._id,
                 title: product.title,
@@ -64,60 +71,148 @@ export default function ProductPage() {
                 image: product.image,
                 quantity: 1,
             });
+
         }
 
         localStorage.setItem(
-            "cart",
+            cartKey,
             JSON.stringify(cart)
         );
 
         alert("Added To Cart");
     };
 
+    if (!product) {
 
+        return (
 
+            <div
+                style={{
+                    minHeight: "100vh",
+                    background: "#000",
+                    color: "#fff",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "24px"
+                }}
+            >
+                Loading Product...
+            </div>
+
+        );
+    }
 
     return (
-        <div className="min-h-screen bg-black text-white px-5 md:px-8 lg:px-12 py-28" style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-around'
-        }}>
-            <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-                {/* Product Image */}
+        <div
+            style={{
+                minHeight: "100vh",
+                background: "#000",
+                color: "#fff",
+                padding: "120px 20px 60px"
+            }}
+        >
+
+            <div
+                style={{
+                    maxWidth: "1400px",
+                    margin: "0 auto",
+                    display: "grid",
+                    gridTemplateColumns:
+                        "repeat(auto-fit,minmax(350px,1fr))",
+                    gap: "60px",
+                    alignItems: "center"
+                }}
+            >
+
+                {/* IMAGE */}
+
                 <div>
+
                     <img
                         src={product.image}
                         alt={product.title}
-                        className="w-full h-auto max-h-187.5 object-cover rounded-2xl"
+                        style={{
+                            width: "100%",
+                            borderRadius: "25px",
+                            objectFit: "cover",
+                            boxShadow:
+                                "0 20px 50px rgba(0,0,0,.5)"
+                        }}
                     />
+
                 </div>
 
-                {/* Product Content */}
+                {/* CONTENT */}
+
                 <div>
 
-                    <p className="text-[#b08d57] uppercase tracking-[3px] mb-4 text-sm">
+                    <p
+                        style={{
+                            color: "#b08d57",
+                            letterSpacing: "3px",
+                            textTransform: "uppercase",
+                            marginBottom: "15px"
+                        }}
+                    >
                         {product.category}
                     </p>
 
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5">
+                    <h1
+                        style={{
+                            fontSize: "60px",
+                            fontWeight: "800",
+                            lineHeight: "1.1",
+                            marginBottom: "20px"
+                        }}
+                    >
                         {product.title}
                     </h1>
 
-                    <h2 className="text-[#b08d57] text-3xl md:text-4xl mb-8 font-semibold">
+                    <h2
+                        style={{
+                            color: "#b08d57",
+                            fontSize: "42px",
+                            marginBottom: "30px"
+                        }}
+                    >
                         ₹{product.price}
                     </h2>
 
-                    <p className="text-gray-300 leading-8 text-base md:text-lg mb-10">
+                    <p
+                        style={{
+                            color: "#cfcfcf",
+                            lineHeight: "1.9",
+                            fontSize: "18px",
+                            marginBottom: "40px"
+                        }}
+                    >
                         {product.description}
                     </p>
 
-                    {/* Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4">
+                    {/* BUTTONS */}
+
+                    <div
+                        style={{
+                            display: "flex",
+                            gap: "15px",
+                            flexWrap: "wrap"
+                        }}
+                    >
+
                         <button
                             onClick={addToCart}
-                            className="retro-btn border border-gray-700 w-full sm:w-auto px-8 py-4 rounded-xl"
+                            style={{
+                                padding: "15px 35px",
+                                background: "#b08d57",
+                                color: "#000",
+                                border: "none",
+                                borderRadius: "12px",
+                                fontWeight: "700",
+                                cursor: "pointer",
+                                fontSize: "16px"
+                            }}
                         >
                             Add To Cart
                         </button>
@@ -125,27 +220,53 @@ export default function ProductPage() {
                         <Link
                             href={`/chakeout?id=${product._id}`}
                         >
-                            <button className="retro-btn border border-gray-700 w-full sm:w-auto px-8 py-4 rounded-xl">
+
+                            <button
+                                style={{
+                                    padding: "15px 35px",
+                                    background: "transparent",
+                                    color: "#fff",
+                                    border:
+                                        "1px solid #444",
+                                    borderRadius: "12px",
+                                    fontWeight: "700",
+                                    cursor: "pointer",
+                                    fontSize: "16px"
+                                }}
+                            >
                                 Buy Now
                             </button>
+
                         </Link>
 
                     </div>
 
-                    {/* Product Details */}
-                    <div className="mt-12 pt-8 border-t border-zinc-800 space-y-3 text-gray-300">
+                    {/* DETAILS */}
 
-                        <p>
-                            <span className="font-semibold text-white">
+                    <div
+                        style={{
+                            marginTop: "50px",
+                            borderTop:
+                                "1px solid #222",
+                            paddingTop: "30px"
+                        }}
+                    >
+
+                        <p
+                            style={{
+                                marginBottom: "12px"
+                            }}
+                        >
+                            <strong>
                                 Category:
-                            </span>{" "}
+                            </strong>{" "}
                             {product.category}
                         </p>
 
                         <p>
-                            <span className="font-semibold text-white">
+                            <strong>
                                 Brand:
-                            </span>{" "}
+                            </strong>{" "}
                             Ink & Thread
                         </p>
 
@@ -154,6 +275,8 @@ export default function ProductPage() {
                 </div>
 
             </div>
+
         </div>
+
     );
 }

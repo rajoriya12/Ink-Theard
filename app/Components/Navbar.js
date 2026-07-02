@@ -45,16 +45,15 @@ export default function Navbar() {
     };
 
     useEffect(() => {
+        const email = localStorage.getItem("userEmail");
+        const cartKey = `cart_${email}`;
 
         const cart =
             JSON.parse(
-                localStorage.getItem("cart")
+                localStorage.getItem(cartKey)
             ) || [];
 
-        setCartCount(cart.length);
-
-        const email =
-            localStorage.getItem("userEmail");
+        setCartCount(cart.length);;
 
         const name =
             localStorage.getItem("userName");
@@ -73,15 +72,15 @@ export default function Navbar() {
 
     useEffect(() => {
 
+        const email = localStorage.getItem("userEmail");
+        const cartKey = `cart_${email}`;
+
         const cart =
             JSON.parse(
-                localStorage.getItem("cart")
+                localStorage.getItem(cartKey)
             ) || [];
 
-        setCartCount(cart.length);
-
-        const email =
-            localStorage.getItem("userEmail");
+        setCartCount(cart.length);;
 
         const name =
             localStorage.getItem("userName");
