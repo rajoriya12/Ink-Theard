@@ -3,9 +3,9 @@ import React from "react";
 function LookbookGallery() {
   const images = [
     "/hero.jpeg",
-    "/C1.jpeg",
-    "/C2.jpeg",
-    "/C3.jpeg",
+    "/wq1.jpeg",
+    "/qw2.jpeg",
+    "/w3.jpeg",
   ];
 
   return (

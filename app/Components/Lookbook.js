@@ -1,7 +1,7 @@
 "use client";
 
 const lookbookImages = [
-  "/c1.jpeg",
+  "/an1.jpeg",
   "/LB2.jpeg",
   "/LB3.jpeg",
   "/LB4.jpeg",

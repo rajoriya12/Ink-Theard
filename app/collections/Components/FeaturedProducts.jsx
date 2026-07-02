@@ -10,7 +10,7 @@ function FeaturedProducts() {
     {
       name: "Retro Jacket",
       price: "₹3999",
-      image: "/C2.jpeg",
+      image: "/ab2.jpeg",
     },
     {
       name: "Silver Ring",
