@@ -8,6 +8,7 @@ export default function ProductPage() {
 
     const params = useParams();
     const [product, setProduct] = useState(null);
+    const BACKEND_URL = "http://127.0.0.1:8000"
 
     useEffect(() => {
 
@@ -131,7 +132,7 @@ export default function ProductPage() {
                 <div>
 
                     <img
-                        src={product.image}
+                       src={product.image.startsWith('http') ? product.image : `${BACKEND_URL}${product.image}`}
                         alt={product.title}
                         style={{
                             width: "100%",

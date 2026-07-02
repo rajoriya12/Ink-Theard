@@ -11,7 +11,7 @@ function CheckoutContent() {
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const BACKEND_URL = "http://127.0.0.1:8000";
 
   const [formData, setFormData] = useState({
     customerName: "",
@@ -172,8 +172,9 @@ function CheckoutContent() {
           className="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-xl"
           style={{ padding: "15px" }}
         >
+
           <img
-            src={product.image}
+            src={product.image.startsWith('http') ? product.image : `${BACKEND_URL}${product.image}`}
             alt={product.title}
             className="w-full h-105 object-cover"
           />
