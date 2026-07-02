@@ -7,21 +7,21 @@ const collections = [
   {
     id: 1,
     title: "Midnight Wear",
-    image: "/c1.jpeg",
+    image: "/C1.jpeg",
     desc: "Dark oversized streetwear inspired by midnight streets.",
   },
 
   {
     id: 2,
     title: "Retro Streets",
-    image: "/c2.jpeg",
+    image: "/C2.jpeg",
     desc: "Vintage fashion blended with modern urban aesthetics.",
   },
 
   {
     id: 3,
     title: "Silent Hearts",
-    image: "/c3.jpeg",
+    image: "/C3.jpeg",
     desc: "Minimal luxury pieces for timeless souls.",
   },
 ];
